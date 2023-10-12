@@ -40,12 +40,41 @@ app.get('/namelog', (req, res)=>{
 			throw err;
 		}
 		else {
-			listInfo = data.split(';');
+			let listInfoFull = data.split(';');
+			let i = 0;
+			let writenCode = "";
+			for (let line of listInfoFull){
+				let innerList = line.split(',');
+				let listInfoNew = [];
+				listInfoNew.push(innerList);
+				console.log(listInfoNew);
+				writenCode += ('Eesnimi: ' + listInfoNew[i][0] + ', Perekonnanimi:' + listInfoNew[i][1] + 'Kuupäev: ' + listInfoNew[i][2] + ';');
+				i++;
+			}
+			let listinfo = writenCode.split(';');
 			res.render('justlist', {h1: 'Nimede list', list: listInfo});
 		}
 	});
 });
 
+/*app.get('/namelog', (req, res)=>{
+	let listInfo = [];
+	data = fs.readFileSync('public/txtfiles/namelog.txt', 'utf8')
+	let listInfoFull = data.split(';');
+	let i = 0;
+	let writenCode = "";
+	for (let line of listInfoFull){
+		let innerList = line.split(',');
+		let listInfoNew = [];
+		listInfoNew.push(innerList);
+		console.log(listInfoNew);
+		//writenCode += ('Eesnimi: ' + listInfoNew[i][0] + ', Perekonnanimi:' + listInfoNew[i][1] + 'Kuupäev: ' + listInfoNew[i][2] + ';');
+		i++;
+	}
+	let listinfo = writenCode.split(';');
+	res.render('justlist', {h1: 'Nimede list', list: listInfo});
+
+});*/
 
 
 app.listen(5104);

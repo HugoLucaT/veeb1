@@ -1,0 +1,28 @@
+{
+  "name": "vp23",
+  "version": "1.0.0",
+  "description": "VP kursuse projekt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://hugolucat@github.com/HugoLucaT/veeb1.git"
+  },
+  "keywords": [
+    "Veebiprogrameerimine",
+    "node.js",
+    "TLU"
+  ],
+  "author": "Hugo Luca Tigane",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HugoLucaT/veeb1/issues"
+  },
+  "homepage": "https://github.com/HugoLucaT/veeb1#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  }
+}

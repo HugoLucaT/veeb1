@@ -33,29 +33,28 @@ app.get('/wisdom', (req, res)=>{
 	//res.render('index')
 });
 
-app.get('/namelog', (req, res)=>{
-	let listInfo = [];
-	fs.readFile('public/txtfiles/namelog.txt', 'utf8', (err, data)=>{
-		if (err){
+app.get('/namelog', (req, res) => {
+	fs.readFile('public/txtfiles/namelog.txt', 'utf8', (err, data) => {
+		if (err) {
 			throw err;
-		}
+		} 
 		else {
-			let listInfoFull = data.split(';');
-			let i = 0;
-			let writenCode = "";
-			for (let line of listInfoFull){
-				let innerList = line.split(',');
-				let listInfoNew = [];
-				listInfoNew.push(innerList);
-				console.log(listInfoNew);
-				writenCode += ('Eesnimi: ' + listInfoNew[i][0] + ', Perekonnanimi:' + listInfoNew[i][1] + 'Kuupäev: ' + listInfoNew[i][2] + ';');
-				i++;
+			const listInfoFull = data.split(';');
+			const listInfo = [];
+			for (const line of listInfoFull) {
+				const innerList = line.split(',');
+				const [firstName, lastName, date] = innerList;
+				//console.log(innerList);
+				const textInfo = ('Eesnimi: ' + firstName + ', Perekonnanimi: ' +  lastName + ', Kuupäev: ' + timeInfo.dateENtoDateET(date));
+				//console.log(textInfo);
+				listInfo.push(textInfo);
+				//console.log(listInfo);
 			}
-			let listinfo = writenCode.split(';');
-			res.render('justlist', {h1: 'Nimede list', list: listInfo});
+		res.render('justlist', { h1: 'Nimede list', list: listInfo });
 		}
-	});
+  });
 });
+
 
 /*app.get('/namelog', (req, res)=>{
 	let listInfo = [];

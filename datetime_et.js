@@ -43,5 +43,15 @@ const timeOfDayET = function(){
 	return partOfDay;
 }
 
+const dateENtoDateET = function(data){
+	let timeInfo = data.split("/");
+	//console.log(timeInfo);
+	let timeInfoET = (timeInfo[1] + ". " + monthNamesET[timeInfo[0] - 1] + " " + timeInfo[2]);
+	//console.log(timeInfoET);
+	return timeInfoET
+}
+
+
+
 //ekspordin all
-module.exports = {dateETformated: dateETformated, timeETnewformated: timeETnewformated, timeOfDayET:timeOfDayET, monthsET:monthNamesET, dateENformated: dateENformated};
+module.exports = {dateETformated: dateETformated, timeETnewformated: timeETnewformated, timeOfDayET:timeOfDayET, monthsET:monthNamesET, dateENformated: dateENformated, dateENtoDateET: dateENtoDateET};

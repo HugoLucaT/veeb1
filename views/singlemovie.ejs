@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Hugo</title>
+</head>
+<body>
+	<img src="/banner/banner.png" alt="Veebiprogrameerimise kursuse bänner">
+	<h1>Eesti film</h1>
+	<hr>
+	<ul>
+		<li><a href="/eestifilm">Eesti filmide avaleht</a></li>
+		<li><a href="/">Avalehele</a></li>
+	</ul>
+	<hr>
+	<h2>Otsi filmi</h2>
+	<form method="POST">
+		<input type="number" name="idNum" id="idNum min="1" max="<% maxSize %>" value="1" required>
+		<br>
+		<input type="submit" name="personSubmit" value="Otsi">
+	</form>
+</body>
+</html>

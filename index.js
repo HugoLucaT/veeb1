@@ -1,10 +1,24 @@
 const express = require('express');
-const timeInfo = require('./datetime_et');
 const app = express();
 const fs = require("fs");
+const mysql = require('mysql2');
+const bodyparser = require('body-parser');
+
+const dbInfo = require('../../vp23config');
+const timeInfo = require('./datetime_et');
+//const database = 'if23_hugoluca_ti';
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.use(bodyparser.urlencoded({extended: false}));
+
+//andmebaasi ühendus
+const conn = mysql.createConnection({
+	host: dbInfo.configData.host,
+	user: dbInfo.configData.user,
+	password: dbInfo.configData.password,
+	database: dbInfo.configData.database
+});
 
 app.get('/', (req, res)=>{
 	//res.send('See töötab!');
@@ -56,24 +70,72 @@ app.get('/namelog', (req, res) => {
 });
 
 
-/*app.get('/namelog', (req, res)=>{
-	let listInfo = [];
-	data = fs.readFileSync('public/txtfiles/namelog.txt', 'utf8')
-	let listInfoFull = data.split(';');
-	let i = 0;
-	let writenCode = "";
-	for (let line of listInfoFull){
-		let innerList = line.split(',');
-		let listInfoNew = [];
-		listInfoNew.push(innerList);
-		console.log(listInfoNew);
-		//writenCode += ('Eesnimi: ' + listInfoNew[i][0] + ', Perekonnanimi:' + listInfoNew[i][1] + 'Kuupäev: ' + listInfoNew[i][2] + ';');
-		i++;
-	}
-	let listinfo = writenCode.split(';');
-	res.render('justlist', {h1: 'Nimede list', list: listInfo});
+app.get('/eestifilm', (req, res)=>{
+	res.render('filmindex');
+});
 
+app.get('/eestifilm/filmiloend', (req, res)=>{
+	let sql = 'SELECT title, production_year, duration FROM movie';
+	let sqlResult = [];
+	conn.query(sql, (err, result)=>{
+		if (err){
+			throw err;
+			res.render('filmlist', {filmlist: sqlResult});
+			//conn.end();
+		}
+		else {
+			//console.log(result)
+			res.render('filmlist', {filmlist: result});
+			//conn.end();
+		}
+	});
+	//res.render('filmlist');
+});
+
+app.get('/eestifilm/addfilmperson', (req, res)=>{
+	res.render('addfilmperson');
+});
+
+app.get('/eestifilm/singlemovie', (req, res)=>{
+	res.render('singlemovie');
+	
+});
+
+
+/*app.post('/eestifilm/singlemovie', (req, res)=>{
+	let sql = 'SELECT * FROM movie where id=?';
+	let sqlResult = [];
+	conn.query(sql, [req.body.idNum] (err, result)=>{
+		if (err){
+			throw err;
+			res.render('singlemovielist', {movieinfo: sqlResult});
+			conn.end();
+		}
+		else {
+			
+			res.render('singlemovielist', {movieinfo: result});
+			//conn.end();
+		}
+	});
+	//res.render('filmlist');
 });*/
 
+app.post('/eestifilm/addfilmperson', (req, res)=>{
+	//;
+	//res.send("Andmed");
+	let notice = '';
+	let sql = 'INSERT INTO person (first_name, last_name, birth_date) VALUES(?,?,?)';
+	conn.query(sql, [req.body.firstNameInput, req.body.lastNameInput, req.body.birthDateInput], (err, result) =>{
+		if (err) {
+			notice = 'Andmete salvestamine ebaõnnestus!';
+			res.render('addfilmperson', {notice: notice});
+			throw err;
+		}
+		else {
+			notice = req.body.firstNameInput + ' ' + req.body.lastnameInput + ' andmete salvestamine õnnestus!';
+			res.render('addfilmperson', {notice: notice});
+		}
+	});
+});
 
 app.listen(5104);

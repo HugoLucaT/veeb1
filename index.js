@@ -71,6 +71,7 @@ app.get('/namelog', (req, res) => {
 
 
 app.get('/eestifilm', (req, res)=>{
+	
 	res.render('filmindex');
 });
 
@@ -97,28 +98,39 @@ app.get('/eestifilm/addfilmperson', (req, res)=>{
 });
 
 app.get('/eestifilm/singlemovie', (req, res)=>{
-	res.render('singlemovie');
-	
-});
-
-
-/*app.post('/eestifilm/singlemovie', (req, res)=>{
-	let sql = 'SELECT * FROM movie where id=?';
-	let sqlResult = [];
-	conn.query(sql, [req.body.idNum] (err, result)=>{
+	let movieTableInfo = 'SELECT COUNT(title) FROM movie';
+	conn.query(movieTableInfo, (err, result)=>{
 		if (err){
 			throw err;
-			res.render('singlemovielist', {movieinfo: sqlResult});
+			//conn.end();
+		}
+		else {
+			console.log(result[0]['COUNT(title)']);
+			res.render('singlemovie', {maxSize: result[0]['COUNT(title)']});
+			//conn.end();
+		}
+	});
+});
+
+//app.post('/
+
+
+app.post('/eestifilm/singlemovie', (req, res)=>{
+	let sql = 'SELECT * FROM movie where id=?';
+	let sqlResult = [];
+	conn.query(sql, [req.body.idNum], (err, result)=>{
+		if (err){
+			throw err;
+			res.render('singlemovielist', {filmlist: sqlResult});
 			conn.end();
 		}
 		else {
-			
-			res.render('singlemovielist', {movieinfo: result});
+			res.render('singlemovielist', {filmlist: result});
 			//conn.end();
 		}
 	});
 	//res.render('filmlist');
-});*/
+});
 
 app.post('/eestifilm/addfilmperson', (req, res)=>{
 	//;
@@ -137,5 +149,7 @@ app.post('/eestifilm/addfilmperson', (req, res)=>{
 		}
 	});
 });
+
+
 
 app.listen(5104);

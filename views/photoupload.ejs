@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Hugo</title>
+</head>
+<body>
+	<img src="/banner/banner.png" alt="Veebiprogrameerimise kursuse bänner">
+	<h1>Fotode laadimine galeriise</h1>
+	<hr>
+	<ul>
+		<li><a href="/news">Uudised</a></li>
+		<li><a href="/">Avalehele</a></li>
+	</ul>
+	<hr>
+	<h2>Foto üleslaadimine</h2>
+	<form method="POST" enctype="multipart/form-data">
+		<label for="photoInput">Vali pildifail</label>
+		<input type="file" name="photoInput" id="photoInput" required>
+		<br>
+		<label for="altInput">Foto alternatiivtekst</label>
+		<input type="text" name="altInput" id="altInput" placeholder="Foto alt tekst ...">
+		<br>
+		<input type="radio" id="privacyInput1" name="privacyInput" value="1" checked>
+		<label for="privacyInput1">Privaatne (ainult omanik näeb)</label><br>
+		<input type="radio" id="privacyInput2" name="privacyInput" value="2">
+		<label for="privacyInput1">Sisselogitud kasutajad näevad</label><br>
+		<input type="radio" id="privacyInput3" name="privacyInput" value="3">
+		<label for="privacyInput1">Avalik</label><br>
+		<input type="submit" name="photoSubmit" value="Postita">
+	</form>
+	<p><%= locals.notice || 'Ootel!' %></p>
+</body>
+</html>

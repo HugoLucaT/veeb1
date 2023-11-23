@@ -51,7 +51,15 @@ const dateENtoDateET = function(data){
 	return timeInfoET
 }
 
-
+const dateSQLformated = function(){
+	let timeNow = new Date();
+	//console.log(timeNow)
+	let dateNow =  timeNow.getDate();
+	let monthNow = timeNow.getMonth();
+	let yearNow = timeNow.getFullYear();
+	let dateEN = yearNow + "-" + (monthNow + 1) + "-" + dateNow;
+	return dateEN;
+}
 
 //ekspordin all
-module.exports = {dateETformated: dateETformated, timeETnewformated: timeETnewformated, timeOfDayET:timeOfDayET, monthsET:monthNamesET, dateENformated: dateENformated, dateENtoDateET: dateENtoDateET};
+module.exports = {dateETformated: dateETformated, timeETnewformated: timeETnewformated, timeOfDayET:timeOfDayET, monthsET:monthNamesET, dateENformated: dateENformated, dateENtoDateET: dateENtoDateET, dateSQLformated: dateSQLformated};

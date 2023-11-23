@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Hugo Luca, veebiprogrammeerimine 2023</title>
+	<link rel="stylesheet" href="/style/gallery.css">
+</head>
+<body>
+	<img src="/banner/banner.png" alt="veebiprogrammeerimise kursuse banner">
+	<h1>Fotogalerii</h1>
+	<ul>
+		<li><a href="/">Avalehele</a></li>
+	</ul>
+	<hr>
+	<h2>Galerii</h2>
+	<div class="gallery">
+	
+	
+		<!--Järgneb korduv osa, iga pisipildi jaoks oma-->
+		<div class="thumbgallery">
+		<% allPictures.forEach(function(pics){ %>
+			<img src="gallery/thumbs/<%= pics.filename %>" alt="<%= pics.alttext %>"  data-filename="<%= pics.filename %>"  data-id="<%= pics.id %>"  class="thumbs">
+			<p></p> 
+		<% }); %>
+		</div>
+	
+	
+	</div>
+</body>
+</html>

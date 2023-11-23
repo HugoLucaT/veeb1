@@ -13,12 +13,12 @@
 		<li><a href="/">Avalehele</a></li>
 	</ul>
 	<hr>
-	<h2>Andmebaasis olevate Eesti filmide loend</h2>
-	<ol>
-		<% filmlist.forEach(function(film){ %>
-			<li><%= film.title %>, toodetud <%= film.production_year %>, filmi kestvus <%= film.duration %> minutit.</li>
-		<% }); %>
-	</ol>
+	<h2>Film, id: <%= id %></h2>
+	
+	<% filmlist.forEach(function(film){ %>
+		<li><%= film.title %>, toodetud <%= film.production_year %>, filmi kestvus <%=film.duration %> minutit.</li>
+	<% }); %>
+	
 	<hr>
 	<a href="/eestifilm/singlemovie">Leia teine film</a></li>
 </body>

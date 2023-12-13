@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Hugo</title>
+	<script src="/script/check.js" defer></script>
 </head>
 <body>
 	<img src="/banner/banner.png" alt="Veebiprogrameerimise kursuse bänner">
@@ -27,7 +28,8 @@
 		<label for="privacyInput1">Sisselogitud kasutajad näevad</label><br>
 		<input type="radio" id="privacyInput3" name="privacyInput" value="3">
 		<label for="privacyInput1">Avalik</label><br>
-		<input type="submit" name="photoSubmit" value="Postita">
+		<input type="submit" name="photoSubmit" id="photoSubmit" value="Postita">
+		<span id="checkInfo"></span>
 	</form>
 	<p><%= locals.notice || 'Ootel!' %></p>
 </body>

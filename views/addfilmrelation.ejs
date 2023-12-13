@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Hugo</title>
+	<script src="/script/moviecheck.js" defer></script>
+</head>
+<body>
+	<img src="/banner/banner.png" alt="Veebiprogrameerimise kursuse bänner">
+	<h1>Eesti film</h1>
+	<hr>
+	<ul>
+		<li><a href="/eestifilm">Eesti filmide avaleht</a></li>
+		<li><a href="/">Avalehele</a></li>
+	</ul>
+	<hr>
+	<h2>Lisa filmitegelane ja filmiseos</h2>
+	<form method="POST">
+		<label for="personInput">Filmitegelane</label>
+		<select id="personInput" name="personInput">
+			<option value="0" selected disabled>Vali tegelane</option>
+			<% personInfo.forEach(function(person){ %>
+				<option value="<%= person.id %>"><%= person.first_name %> <%= person.last_name %></option>
+			<% }); %>
+		</select>
+		<label for="filmInput">Film</label>
+		<select id="filmInput" name="filmInput">
+			<option value="0" selected disabled>Vali film</option>
+			<% movieInfo.forEach(function(movie){ %>
+				<option value="<%= movie.id %>"><%= movie.title %></option>
+			<% }); %>
+		</select>
+		<label for="positionInput">Positsioon</label>
+		<select id="positionInput" name="positionInput">
+			<option value="0" selected disabled>Vali positsioon</option>
+			<option value="1">Näitleja</option>
+			<option value="2">Režisöör</option>
+		</select>
+		<label for="roleInput">Näitleja roll</label>
+		<input type="text" name="roleInput" id="roleInput" placeholder="Roll ...">
+		<br>
+		<input type="submit" name="personSubmit" value="Salvesta">
+	</form>
+	<p><%= locals.notice || 'Ootel!' %></p>
+</body>
+</html>
